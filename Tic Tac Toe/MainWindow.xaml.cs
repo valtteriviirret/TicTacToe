@@ -138,35 +138,117 @@ namespace Tic_Tac_Toe
         /// </summary>
         private void CheckWinner()
         {
-            //if statement for different wins and then switch statement
-            //this seems kinda unnesessary but I just wanna do it like this
+            //variables for different wins
             int caseSwitch = 0;
             var row1 =(mResults[0] & mResults[1] & mResults[2]) == mResults[0];
             var row1win = mResults[0] != Mark.Free && row1;
-            
+
+            var row2 = (mResults[3] & mResults[4] & mResults[5]) == mResults[3];
+            var row2win = mResults[3] != Mark.Free && row2;
+
+            var row3 = (mResults[6] & mResults[7] & mResults[8]) == mResults[6];
+            var row3win = mResults[6] != Mark.Free && row3;
+
+            var column1 = (mResults[0] & mResults[3] & mResults[6]) == mResults[0];
+            var column1win = mResults[0] != Mark.Free && column1;
+
+            var column2 = (mResults[1] & mResults[4] & mResults[7]) == mResults[1];
+            var column2win = mResults[1] != Mark.Free && column2;
+
+            var column3 = (mResults[2] & mResults[5] & mResults[8]) == mResults[2];
+            var column3win = mResults[2] != Mark.Free && column3;
+
+            var cross1 = (mResults[0] & mResults[4] & mResults[8]) == mResults[0];
+            var cross1win = mResults[0] != Mark.Free && cross1;
+
+            var cross2 = (mResults[2] & mResults[4] & mResults[6]) == mResults[2];
+            var cross2win = mResults[2] != Mark.Free && cross2;
+
+            //if variable is true then caseSwitch gets correct value for switch
             if (row1win)
             {
                 caseSwitch = 1;
             }
 
-            var row2 = mResults[3] && mResults[4] && mResults[5] == mResults[3];
-            
+            else if (row2win)
+            {
+                caseSwitch = 2;
+            }
+
+            else if (row3win)
+            {
+                caseSwitch = 3;
+            }
+
+            else if (column1win)
+            {
+                caseSwitch = 4;
+            }
+            else if (column2win)
+            {
+                caseSwitch = 5;
+            }
+
+            else if (column3win)
+            {
+                caseSwitch = 6;
+            }
+
+            else if (cross1win)
+            {
+                caseSwitch = 7;
+            }
+            else if(cross2win)
+            {
+                caseSwitch = 8;
+            }
+            //else if gives value here and in switch statement game is ended and victorius cells get painted in green
             switch(caseSwitch)
             {
                 case 1:
-                //Game ended
+                //game is ended
                 mGameEnded = true;
 
-                //Highlight winning cells in green
+                //selecting played buttons and then turning them to green
                 Button0_0.Background = Button1_0.Background = Button2_0.Background = Brushes.Green;
                 break;
+
+                case 2:
+                    mGameEnded = true;
+                    Button0_1.Background = Button1_1.Background = Button2_1.Background = Brushes.Green;
+                break;
+
+                case 3:
+                    mGameEnded = true;
+                    Button0_2.Background = Button1_2.Background = Button2_2.Background = Brushes.Green;
+                break;
+
+                case 4:
+                    mGameEnded = true;
+                    Button0_0.Background = Button0_1.Background = Button0_2.Background = Brushes.Green;
+                break;
+
+                case 5:
+                    mGameEnded = true;
+                    Button1_0.Background = Button1_1.Background = Button1_2.Background = Brushes.Green;
+                break;
+
+                case 6:
+                    mGameEnded = true;
+                    Button2_0.Background = Button2_1.Background = Button2_2.Background = Brushes.Green;
+                break;
+
+                case 7:
+                    mGameEnded = true;
+                    Button0_0.Background = Button1_1.Background = Button2_2.Background = Brushes.Green;
+                break;
+
+                case 8:
+                    mGameEnded = true;
+                    Button2_0.Background = Button1_1.Background = Button0_2.Background = Brushes.Green;
+                break;
+
             }
-
-
-
-
-
-
 
             //check if board is full without winner
             if(!mResults.Any(result => result== Mark.Free))
