@@ -251,7 +251,7 @@ namespace Tic_Tac_Toe
             }
 
             //check if board is full without winner
-            if(!mResults.Any(result => result== Mark.Free))
+            if(!mResults.Any(result => result== Mark.Free) && false)
             {
                 //Game ended
                 mGameEnded = true;
